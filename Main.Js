@@ -3,9 +3,9 @@ let gameBoardRows = document.querySelectorAll('.game-board-rows');
 let gameBoardCells = document.querySelectorAll('.game-tile');
 
 let gameBoardCounters = {
-   r1: [0, 1, 2],
-   r2: [3, 4, 5],
-   r3: [6, 7, 8]
+   r1: [0, 0, 0],
+   r2: [0, 0, 0],
+   r3: [0, 0, 0]
 }
 
 function getCellLocation(){
@@ -15,6 +15,7 @@ function getCellLocation(){
                 rowNumber = rowNumber.toString();
                 let cellNumber = gameBoardCells[i].id.slice(9);
                 gameBoardCells[i].innerText = gameBoardCounters[rowNumber][cellNumber];
+                gameBoardCounters[rowNumber][cellNumber] += 1
         })
     } 
 }
