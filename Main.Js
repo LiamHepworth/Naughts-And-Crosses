@@ -8,28 +8,39 @@ let gameBoardCounters = {
    r3: [0, 0, 0]
 }
 
-function getCellLocation(){
+let clickCount = 0;
+
+function drawCounters(){
     for(let i = 0; i < 9; i++){
-        gameBoardCells[i].addEventListener('mousedown', function(){
-                let rowNumber = 'r' + gameBoardCells[i].id.slice(3,4);
-                rowNumber = rowNumber.toString();
-                let cellNumber = gameBoardCells[i].id.slice(9);
-                gameBoardCells[i].innerText = gameBoardCounters[rowNumber][cellNumber];
-                gameBoardCounters[rowNumber][cellNumber] += 1
-        })
-    } 
-}
+        gameBoardCells[i].addEventListener('click', function(){
 
-getCellLocation()
+            let rowNumber = 'r' + gameBoardCells[i].id.slice(3,4);
+            rowNumber = rowNumber.toString();
+            let cellNumber = gameBoardCells[i].id.slice(9);
+            
+            let gameBoardIndex = gameBoardCounters[rowNumber][cellNumber];
+            gameBoardCells[i].innerText = gameBoardIndex;
 
+            if(gameBoardIndex === 0 && clickCount % 2 == 0){               //ind = even
+                console.log('placed cross')
+            } else if (gameBoardIndex === 0 && clickCount % 2 !== 0){      //ind = odd
+                console.log('placed naught')
+            };
 
-function updateGameBoard(){
-    for(let i = 0; i < 3; i++){
-        gameBoardRows[0].children[i].innerText = gameBoardCounters.r1[i]
-        gameBoardRows[1].children[i].innerText = gameBoardCounters.r2[i]
-        gameBoardRows[2].children[i].innerText = gameBoardCounters.r3[i]
-    };
+            clickCount += 1;
+        });
+    }; 
 };
+
+drawCounters()
+
+// function updateGameBoard(){
+//     for(let i = 0; i < 3; i++){
+//         gameBoardRows[0].children[i].innerText = gameBoardCounters.r1[i]
+//         gameBoardRows[1].children[i].innerText = gameBoardCounters.r2[i]
+//         gameBoardRows[2].children[i].innerText = gameBoardCounters.r3[i]
+//     };
+// };
 
 // updateGameBoard();
 
