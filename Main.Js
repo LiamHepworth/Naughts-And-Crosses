@@ -11,7 +11,16 @@ let gameBoardCounters = {
 function changeGameBoardState(){
     for(let i = 0; i < 9; i++){
         gameBoardCells[i].addEventListener('mousedown', function(){
-            console.log(gameBoardCells[i].id)
+            function getCell(){
+                let rowNumber = gameBoardCells[i].id.slice(3,4)
+                console.log(`row number: ${rowNumber}`);
+                
+                let cellNumber = gameBoardCells[i].id.slice(9)
+                console.log(`cell number: ${cellNumber}`);
+
+                // gameBoardCells[i].innerText = gameBoardCounters.r+rowNumber[cellNumber];
+            }
+            getCell()
         })
     } 
 }
