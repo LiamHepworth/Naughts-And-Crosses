@@ -8,24 +8,18 @@ let gameBoardCounters = {
    r3: [6, 7, 8]
 }
 
-function changeGameBoardState(){
+function getCellLocation(){
     for(let i = 0; i < 9; i++){
         gameBoardCells[i].addEventListener('mousedown', function(){
-            function getCell(){
-                let rowNumber = gameBoardCells[i].id.slice(3,4)
-                console.log(`row number: ${rowNumber}`);
-                
-                let cellNumber = gameBoardCells[i].id.slice(9)
-                console.log(`cell number: ${cellNumber}`);
-
-                // gameBoardCells[i].innerText = gameBoardCounters.r+rowNumber[cellNumber];
-            }
-            getCell()
+                let rowNumber = 'r' + gameBoardCells[i].id.slice(3,4);
+                rowNumber = rowNumber.toString();
+                let cellNumber = gameBoardCells[i].id.slice(9);
+                gameBoardCells[i].innerText = gameBoardCounters[rowNumber][cellNumber];
         })
     } 
 }
 
-changeGameBoardState()
+getCellLocation()
 
 
 function updateGameBoard(){
@@ -36,6 +30,6 @@ function updateGameBoard(){
     };
 };
 
-updateGameBoard();
+// updateGameBoard();
 
 // Array.prototype.indexOf.call(parent, Node);
