@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+h1{
+    margin: 2rem auto;
+    font-size: 40px;
+    letter-spacing: 2px;
+}
+
+#game-board-container{
+    width: 600px;
+    height: 600px;
+    margin: 0 auto 2rem auto;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+.game-board-rows{
+    width: 600px;
+    height: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.game-tile{
+    width: 170px;
+    height: 170px;
+    background-color: magenta;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: inline-block;
+    margin: auto;
+}
