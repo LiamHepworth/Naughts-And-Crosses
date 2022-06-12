@@ -13,21 +13,24 @@ let clickCount = 0;
 function drawCounters(){
     for(let i = 0; i < 9; i++){
         gameBoardCells[i].addEventListener('click', function(){
-
-            let rowNumber = 'r' + gameBoardCells[i].id.slice(3,4);
-            rowNumber = rowNumber.toString();
-            let cellNumber = gameBoardCells[i].id.slice(9);
             
-            let gameBoardIndex = gameBoardCounters[rowNumber][cellNumber];
-            gameBoardCells[i].innerText = gameBoardIndex;
+            let rowNumber = 'r' + gameBoardCells[i].id.slice(3,4); 
+            rowNumber = rowNumber.toString();
 
-            if(gameBoardIndex === 0 && clickCount % 2 == 0){               //ind = even
+            let columnNumber = gameBoardCells[i].id.slice(9);
+            
+            gameBoardCounters[rowNumber][columnNumber] += 1;
+
+            let cellValue = gameBoardCounters[rowNumber][columnNumber];
+            console.log(cellValue)
+
+            if(1 & cellValue && clickCount % 2 == 0){               //ind = even
                 console.log('placed cross')
-            } else if (gameBoardIndex === 0 && clickCount % 2 !== 0){      //ind = odd
+            } else if (1 & cellValue && clickCount % 2 !== 0){      //ind = odd
                 console.log('placed naught')
             };
 
-            clickCount += 1;
+            clickCount ++;
         });
     }; 
 };
