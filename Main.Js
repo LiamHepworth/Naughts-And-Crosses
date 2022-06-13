@@ -19,30 +19,37 @@ function drawCounters(){
 
             let columnNumber = gameBoardCells[i].id.slice(9);
             
-            gameBoardCounters[rowNumber][columnNumber] += 1;
-
             let cellValue = gameBoardCounters[rowNumber][columnNumber];
-
-            if(1 & cellValue && clickCount % 2 == 0){               //ind = even
+            
+            if(cellValue == 0 && clickCount % 2 == 0){               //ind = even
                 gameBoardCells[i].innerText = 'X'
-            } else if (1 & cellValue && clickCount % 2 !== 0){      //ind = odd
+                clickCount ++;
+            } else if (cellValue == 0 && clickCount % 2 !== 0){      //ind = odd
                 gameBoardCells[i].innerText = 'O'
+                clickCount ++;
             };
-
-            clickCount ++;
+            gameBoardCounters[rowNumber][columnNumber] += 1;
+            checkRowsAreEven()
         });
     }; 
 };
 
 drawCounters()
 
-const rowIsEven = (val) => val % 2 == 0;
+const rowIsEven = (val) => val % 2 === 0 && val > 0;
+// const rowIsOdd = (val) => val % 2 !== 0 && val > 0;
 
 function checkRowsAreEven() {
     for(let i = 0; i < 3; i++){
         let rowNum = `r${i + 1}`
-        console.log(gameBoardCounters[rowNum].every(rowIsEven));  //checks if every value in a row is even
+        
+        if(gameBoardCounters[rowNum].every(rowIsEven)){
+            console.log(`Evens wins on row ${rowNum}`)
+        } else if (gameBoardCounters[rowNum].every(rowIsOdd)){
+            console.log(`Odds wins on row ${rowNum}`)
+        }
     }
 }
 
-checkRowsAreEven();
+
+// checkRowsAreEven();
