@@ -22,12 +22,11 @@ function drawCounters(){
             gameBoardCounters[rowNumber][columnNumber] += 1;
 
             let cellValue = gameBoardCounters[rowNumber][columnNumber];
-            console.log(cellValue)
 
             if(1 & cellValue && clickCount % 2 == 0){               //ind = even
-                console.log('placed cross')
+                gameBoardCells[i].innerText = 'X'
             } else if (1 & cellValue && clickCount % 2 !== 0){      //ind = odd
-                console.log('placed naught')
+                gameBoardCells[i].innerText = 'O'
             };
 
             clickCount ++;
@@ -37,14 +36,13 @@ function drawCounters(){
 
 drawCounters()
 
-// function updateGameBoard(){
-//     for(let i = 0; i < 3; i++){
-//         gameBoardRows[0].children[i].innerText = gameBoardCounters.r1[i]
-//         gameBoardRows[1].children[i].innerText = gameBoardCounters.r2[i]
-//         gameBoardRows[2].children[i].innerText = gameBoardCounters.r3[i]
-//     };
-// };
+const rowIsEven = (val) => val % 2 == 0;
 
-// updateGameBoard();
+function checkRowsAreEven() {
+    for(let i = 0; i < 3; i++){
+        let rowNum = `r${i + 1}`
+        console.log(gameBoardCounters[rowNum].every(rowIsEven));  //checks if every value in a row is even
+    }
+}
 
-// Array.prototype.indexOf.call(parent, Node);
+checkRowsAreEven();
