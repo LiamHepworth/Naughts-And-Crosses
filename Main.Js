@@ -31,8 +31,8 @@ function drawCounters(){
                 gameBoardCounters[rowNumber][columnNumber] = 1;
             };
             // checkRows();
-            checkColumns(1);
-            // checkDiagonals();
+            // checkColumns(1);
+            checkDiagonals();
         });
     }; 
 };
@@ -49,6 +49,8 @@ function checkForWinner(arr){
         return
     } else if (arr.every(threeCellsAreOdd)){
         console.log('naughts wins')
+        return
+    } else {
         return
     }
 }
@@ -77,26 +79,38 @@ function checkColumns(col) {
         let rowNum = `r${k + 1}`;
         arrayFromColumn += gameBoardCounters[rowNum][col].toString(); 
     }
-
-        // arrayFromColumn = arrayFromColumn.split('');
-        // finalColumArray = arrayFromColumn.map(x => parseInt(x));
-
         checkForWinner(createArrayFromCells(arrayFromColumn, finalColumArray));
-
-        // checkForWinner(finalColumArray);
         return
 };
 
 function checkDiagonals(){
 
     let arrayFromDiagonalsLeftToRight = [];
+    let finalDiagonalsArrayLeftToRight = [];
 
     for(let d = 0; d < 3; d++){
         let rowNum = `r${d + 1}`;
         let colNum = d
 
         arrayFromDiagonalsLeftToRight += gameBoardCounters[rowNum][colNum]
-        console.log(arrayFromDiagonalsLeftToRight);
     }
+    checkForWinner(createArrayFromCells(arrayFromDiagonalsLeftToRight, finalDiagonalsArrayLeftToRight));
+    
+    // let arrayFromDiagonalsRight = [];
+    // let finalDiagonalsArrayRight = [];
+
+    // for(let d = 3; d > 0; d--){
+    //     let rowNum = `r${d}`;
+    //     // console.log(rowNum)
+    //     let colNum = d
+    //     // console.log(colNum)
+    
+    //     arrayFromDiagonalsRight += gameBoardCounters[rowNum][colNum]
+    // }
+
+    // console.log(createArrayFromCells(arrayFromDiagonalsRight, finalDiagonalsArrayRight))
+
+    // console.log(createArrayFromCells(arrayFromDiagonalsRightToLeft, finalDiagonalsArrayRightToLeft))
+    // checkForWinner(createArrayFromCells(arrayFromDiagonalsRight, finalDiagonalsArrayRight));
 }
 
