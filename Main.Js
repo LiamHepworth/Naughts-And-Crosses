@@ -60,14 +60,15 @@ function checkColumnsForWinner(col) {
     let finalColumArray = [];
 
     for(let k = 0; k < 3; k++){
-
-        let rowNum = `r${k + 1}`
-
+        let rowNum = `r${k + 1}`;
         arrayFromColumn += gameBoardCounters[rowNum][col].toString(); 
-        console.log(arrayFromColumn)
     }
 
-        arrayFromColumn = arrayFromColumn.split('')
+        arrayFromColumn = arrayFromColumn.split('');
         finalColumArray = arrayFromColumn.map(x => parseInt(x));
-        console.log(finalColumArray)
+
+        
+
+        // console.log(finalColumArray)
+        // return finalColumArray;
 }
