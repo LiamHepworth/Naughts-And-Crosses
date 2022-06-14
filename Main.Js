@@ -24,32 +24,50 @@ function drawCounters(){
             if(cellValue == 0 && clickCount % 2 == 0){               //ind = even
                 gameBoardCells[i].innerText = 'X'
                 clickCount ++;
+                gameBoardCounters[rowNumber][columnNumber] = 2;
             } else if (cellValue == 0 && clickCount % 2 !== 0){      //ind = odd
                 gameBoardCells[i].innerText = 'O'
                 clickCount ++;
+                gameBoardCounters[rowNumber][columnNumber] = 1;
             };
-            gameBoardCounters[rowNumber][columnNumber] += 1;
-            checkRowsAreEven()
+            checkRowsForWinner();
+            checkColumnsForWinner(1);
         });
     }; 
 };
 
 drawCounters()
 
-const rowIsEven = (val) => val % 2 === 0 && val > 0;
-// const rowIsOdd = (val) => val % 2 !== 0 && val > 0;
+const threeCellsAreEven = (val) => val % 2 === 0 && val > 0;
+const threeCellsAreOdd = (val) => val % 2 !== 0 && val > 0;
+const stringToNumbers = (string) => parseInt(string);
 
-function checkRowsAreEven() {
+function checkRowsForWinner() {
     for(let i = 0; i < 3; i++){
         let rowNum = `r${i + 1}`
         
-        if(gameBoardCounters[rowNum].every(rowIsEven)){
-            console.log(`Evens wins on row ${rowNum}`)
-        } else if (gameBoardCounters[rowNum].every(rowIsOdd)){
-            console.log(`Odds wins on row ${rowNum}`)
+        if(gameBoardCounters[rowNum].every(threeCellsAreEven)){
+            console.log(`Crosses wins on row ${rowNum}`)
+        } else if (gameBoardCounters[rowNum].every(threeCellsAreOdd)){
+            console.log(`Naughts wins on row ${rowNum}`)
         }
     }
 }
 
+function checkColumnsForWinner(col) { 
 
-// checkRowsAreEven();
+    let arrayFromColumn = [];
+    let finalColumArray = [];
+
+    for(let k = 0; k < 3; k++){
+
+        let rowNum = `r${k + 1}`
+
+        arrayFromColumn += gameBoardCounters[rowNum][col].toString(); 
+        console.log(arrayFromColumn)
+    }
+
+        arrayFromColumn = arrayFromColumn.split('')
+        finalColumArray = arrayFromColumn.map(x => parseInt(x));
+        console.log(finalColumArray)
+}
