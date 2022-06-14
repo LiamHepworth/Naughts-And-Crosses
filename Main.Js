@@ -30,8 +30,9 @@ function drawCounters(){
                 clickCount ++;
                 gameBoardCounters[rowNumber][columnNumber] = 1;
             };
-            checkRowsForWinner();
-            checkColumnsForWinner(1);
+            // checkRows();
+            checkColumns(1);
+            // checkDiagonals();
         });
     }; 
 };
@@ -42,19 +43,32 @@ const threeCellsAreEven = (val) => val % 2 === 0 && val > 0;
 const threeCellsAreOdd = (val) => val % 2 !== 0 && val > 0;
 const stringToNumbers = (string) => parseInt(string);
 
-function checkRowsForWinner() {
-    for(let i = 0; i < 3; i++){
-        let rowNum = `r${i + 1}`
-        
-        if(gameBoardCounters[rowNum].every(threeCellsAreEven)){
-            console.log(`Crosses wins on row ${rowNum}`)
-        } else if (gameBoardCounters[rowNum].every(threeCellsAreOdd)){
-            console.log(`Naughts wins on row ${rowNum}`)
-        }
+function checkForWinner(arr){
+    if(arr.every(threeCellsAreEven)){
+        console.log('crosses wins')
+        return
+    } else if (arr.every(threeCellsAreOdd)){
+        console.log('naughts wins')
+        return
     }
 }
 
-function checkColumnsForWinner(col) { 
+function createArrayFromCells(stringArrName, parsedArrName){
+    stringArrName = stringArrName.split('');
+    parsedArrName = stringArrName.map(x => parseInt(x));
+    return parsedArrName;
+};
+
+function checkRows() {
+    for(let i = 0; i < 3; i++){
+        let rowNum = `r${i + 1}`
+        
+        checkForWinner(gameBoardCounters[rowNum]);
+        return
+    }
+}
+
+function checkColumns(col) { 
 
     let arrayFromColumn = [];
     let finalColumArray = [];
@@ -64,11 +78,25 @@ function checkColumnsForWinner(col) {
         arrayFromColumn += gameBoardCounters[rowNum][col].toString(); 
     }
 
-        arrayFromColumn = arrayFromColumn.split('');
-        finalColumArray = arrayFromColumn.map(x => parseInt(x));
+        // arrayFromColumn = arrayFromColumn.split('');
+        // finalColumArray = arrayFromColumn.map(x => parseInt(x));
 
-        
+        checkForWinner(createArrayFromCells(arrayFromColumn, finalColumArray));
 
-        // console.log(finalColumArray)
-        // return finalColumArray;
+        // checkForWinner(finalColumArray);
+        return
+};
+
+function checkDiagonals(){
+
+    let arrayFromDiagonalsLeftToRight = [];
+
+    for(let d = 0; d < 3; d++){
+        let rowNum = `r${d + 1}`;
+        let colNum = d
+
+        arrayFromDiagonalsLeftToRight += gameBoardCounters[rowNum][colNum]
+        console.log(arrayFromDiagonalsLeftToRight);
+    }
 }
+
