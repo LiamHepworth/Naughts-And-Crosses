@@ -3,9 +3,9 @@ let gameBoardRows = document.querySelectorAll('.game-board-rows');
 let gameBoardCells = document.querySelectorAll('.game-tile');
 
 let gameBoardCounters = {
-   r1: [0, 0, 0],
-   r2: [0, 0, 0],
-   r3: [0, 0, 0]
+   r1: [0, 0, 3],
+   r2: [0, 3, 0],
+   r3: [3, 0, 0]
 }
 
 let clickCount = 0;
@@ -32,7 +32,7 @@ function drawCounters(){
             };
             // checkRows();
             // checkColumns(1);
-            checkDiagonals();
+            checkDiagonalsTopLeft();
         });
     }; 
 };
@@ -83,34 +83,41 @@ function checkColumns(col) {
         return
 };
 
-function checkDiagonals(){
+function checkDiagonalsTopLeft(){
 
-    let arrayFromDiagonalsLeftToRight = [];
-    let finalDiagonalsArrayLeftToRight = [];
+    let diagonalTopLeft = [];
+    let finalDiagonalTopLeft = [];
 
     for(let d = 0; d < 3; d++){
         let rowNum = `r${d + 1}`;
         let colNum = d
 
-        arrayFromDiagonalsLeftToRight += gameBoardCounters[rowNum][colNum]
+        diagonalTopLeft += gameBoardCounters[rowNum][colNum]
     }
-    checkForWinner(createArrayFromCells(arrayFromDiagonalsLeftToRight, finalDiagonalsArrayLeftToRight));
+    checkForWinner(createArrayFromCells(diagonalTopLeft, finalDiagonalTopLeft));
+} 
+
+function checkDiagonalsTopRight(){
     
-    // let arrayFromDiagonalsRight = [];
-    // let finalDiagonalsArrayRight = [];
-
-    // for(let d = 3; d > 0; d--){
-    //     let rowNum = `r${d}`;
-    //     // console.log(rowNum)
-    //     let colNum = d
-    //     // console.log(colNum)
+    let allCells = [];
+    let finalCells = []
     
-    //     arrayFromDiagonalsRight += gameBoardCounters[rowNum][colNum]
-    // }
+    for(let i = 0; i < 3; i ++){
+        let rowNum = `r${i + 1}`;
+        allCells += gameBoardCounters[rowNum]               //creates array from all cells
+    };
+    
+    let filteredCells = allCells.split('').filter(word => word !== ',');     //removes dud values
+    finalCells = filteredCells.map(x => parseInt(x))                         //parses each entry in the array
+    
+    // let diagonalCells = [];
 
-    // console.log(createArrayFromCells(arrayFromDiagonalsRight, finalDiagonalsArrayRight))
+    console.log(finalCells);
 
-    // console.log(createArrayFromCells(arrayFromDiagonalsRightToLeft, finalDiagonalsArrayRightToLeft))
-    // checkForWinner(createArrayFromCells(arrayFromDiagonalsRight, finalDiagonalsArrayRight));
-}
+    
+};
+
+checkDiagonalsTopRight()
+
+
 
