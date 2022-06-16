@@ -3,9 +3,9 @@ let gameBoardRows = document.querySelectorAll('.game-board-rows');
 let gameBoardCells = document.querySelectorAll('.game-tile');
 
 let gameBoardCounters = {
-   r1: [0, 0, 3],
-   r2: [0, 3, 0],
-   r3: [3, 0, 0]
+   r1: [0, 0, 0],
+   r2: [0, 0, 0],
+   r3: [0, 0, 0]
 }
 
 let clickCount = 0;
@@ -30,9 +30,10 @@ function drawCounters(){
                 clickCount ++;
                 gameBoardCounters[rowNumber][columnNumber] = 1;
             };
-            // checkRows();
-            // checkColumns(1);
+            checkRows();
+            checkColumns(1);
             checkDiagonalsTopLeft();
+            checkDiagonalsTopRight();
         });
     }; 
 };
@@ -100,7 +101,8 @@ function checkDiagonalsTopLeft(){
 function checkDiagonalsTopRight(){
     
     let allCells = [];
-    let finalCells = []
+    let finalCells = [];
+    let diagonalCells = [];
     
     for(let i = 0; i < 3; i ++){
         let rowNum = `r${i + 1}`;
@@ -110,14 +112,10 @@ function checkDiagonalsTopRight(){
     let filteredCells = allCells.split('').filter(word => word !== ',');     //removes dud values
     finalCells = filteredCells.map(x => parseInt(x))                         //parses each entry in the array
     
-    // let diagonalCells = [];
-
-    console.log(finalCells);
-
+    diagonalCells = [finalCells[2], finalCells[4], finalCells[6]]
+    checkForWinner(diagonalCells)
     
 };
-
-checkDiagonalsTopRight()
 
 
 
