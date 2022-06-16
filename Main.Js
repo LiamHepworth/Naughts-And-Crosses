@@ -30,10 +30,7 @@ function drawCounters(){
                 clickCount ++;
                 gameBoardCounters[rowNumber][columnNumber] = 1;
             };
-            checkRows();
-            checkColumns(1);
-            checkDiagonalsTopLeft();
-            checkDiagonalsTopRight();
+            checkAllCellsForWinner()
         });
     }; 
 };
@@ -67,12 +64,10 @@ function checkRows() {
         let rowNum = `r${i + 1}`
         
         checkForWinner(gameBoardCounters[rowNum]);
-        return
     }
 }
 
 function checkColumns(col) { 
-
     let arrayFromColumn = [];
     let finalColumArray = [];
 
@@ -81,7 +76,6 @@ function checkColumns(col) {
         arrayFromColumn += gameBoardCounters[rowNum][col].toString(); 
     }
         checkForWinner(createArrayFromCells(arrayFromColumn, finalColumArray));
-        return
 };
 
 function checkDiagonalsTopLeft(){
@@ -114,8 +108,16 @@ function checkDiagonalsTopRight(){
     
     diagonalCells = [finalCells[2], finalCells[4], finalCells[6]]
     checkForWinner(diagonalCells)
-    
 };
+
+function checkAllCellsForWinner(){
+    checkRows();
+    for(let i = 0; i < 3; i++){
+        checkColumns(i);
+    }
+    checkDiagonalsTopLeft();
+    checkDiagonalsTopRight();
+}
 
 
 
