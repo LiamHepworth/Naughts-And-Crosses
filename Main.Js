@@ -2,6 +2,10 @@ let gameBoardContainer = document.querySelector('#game-board-container');
 let gameBoardRows = document.querySelectorAll('.game-board-rows');
 let gameBoardCells = document.querySelectorAll('.game-tile');
 
+const playerOne = document.querySelector('#player-one');
+const playerTwo = document.querySelector('#player-two');
+let winnerPopUpBox = document.querySelector('#winner-pop-up');
+
 let gameBoardCounters = {
    r1: [0, 0, 0],
    r2: [0, 0, 0],
@@ -10,7 +14,7 @@ let gameBoardCounters = {
 
 let clickCount = 0;
 
-function drawCounters(){
+function gameDisplay(){
     for(let i = 0; i < 9; i++){
         gameBoardCells[i].addEventListener('click', function(){
             
@@ -35,7 +39,7 @@ function drawCounters(){
     }; 
 };
 
-drawCounters()
+gameDisplay()
 
 const threeCellsAreEven = (val) => val % 2 === 0 && val > 0;
 const threeCellsAreOdd = (val) => val % 2 !== 0 && val > 0;
@@ -110,7 +114,7 @@ function checkDiagonalsTopRight(){
     checkForWinner(diagonalCells)
 };
 
-function checkAllCellsForWinner(){
+function checkAllCellsForWinner(){    
     checkRows();
     for(let i = 0; i < 3; i++){
         checkColumns(i);

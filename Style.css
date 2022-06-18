@@ -12,12 +12,33 @@ h1{
     letter-spacing: 2px;
 }
 
+.player-icons{
+    width: 600px;
+    height: 50px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.player{
+    background-color: lightblue;
+    margin: auto;
+    height: 45px;
+    padding: 12px 0;
+    width: 270px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-weight: bolder;
+}
+
 #game-board-container{
     width: 600px;
     height: 600px;
     margin: 0 auto 2rem auto;
     border-radius: 15px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
 }
 
 .game-board-rows{
@@ -32,10 +53,26 @@ h1{
 .game-tile{
     width: 170px;
     height: 170px;
-    background-color: magenta;
+    background-color: rgb(216, 231, 235);
     border: 2px solid black;
     border-radius: 10px;
     display: inline-block;
     margin: auto;
     font-size: 40px;
+}
+
+#winner-pop-up{
+    background-color: rgb(20, 136, 199);
+    height: 300px;
+    width: 400px;
+    margin: auto;
+    padding: 130px 0;
+    position: absolute;
+    top: 350px;
+    left: 0;
+    right: 0;
+    font-size: 36px;
+    font-weight: bolder;
+    color: azure;
+    border-radius: 20px;
 }
