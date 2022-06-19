@@ -6,6 +6,11 @@ const playerOne = document.querySelector('#player-one');
 const playerTwo = document.querySelector('#player-two');
 let winnerPopUpBox = document.querySelector('#winner-pop-up');
 
+const playerOneScore = document.querySelector('#player-one-score');
+const playerTwoScore = document.querySelector('#player-two-score');
+
+let gameScoreCounters = [0, 0]
+
 let gameBoardCounters = {
    r1: [0, 0, 0],
    r2: [0, 0, 0],
@@ -45,12 +50,27 @@ const threeCellsAreEven = (val) => val % 2 === 0 && val > 0;
 const threeCellsAreOdd = (val) => val % 2 !== 0 && val > 0;
 const stringToNumbers = (string) => parseInt(string);
 
+function updateScoreDisplay(){
+    playerOneScore.innerText = gameScoreCounters[0];
+    playerTwoScore.innerText = gameScoreCounters[1];
+}
+
+updateScoreDisplay()
+
 function checkForWinner(arr){
     if(arr.every(threeCellsAreEven)){
         console.log('crosses wins')
+        winnerPopUpBox.className = 'winner-pop-up';
+        winnerPopUpBox.innerText = 'Crosses Wins!';
+        gameScoreCounters[0] += 1
+        updateScoreDisplay()
         return
     } else if (arr.every(threeCellsAreOdd)){
         console.log('naughts wins')
+        winnerPopUpBox.className = 'winner-pop-up';
+        winnerPopUpBox.innerText = 'Naughts Wins!';
+        gameScoreCounters[1] += 1
+        updateScoreDisplay()
         return
     } else {
         return

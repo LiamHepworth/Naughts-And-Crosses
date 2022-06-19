@@ -11,11 +11,17 @@
 
     <h1>Naughts and Crosses</h1>
 
-    <div class="player-icons">
-        <span id="player-one" class="player">Crosses</span>
-        <span id="player-two" class="player">Naughts</span>
+    <div class="players-scores">
+        <span id="player-one" class="button">Crosses</span>
+        <span id="player-one-score" class="button score-box"></span>
+        <span id="player-two-score" class="button score-box"></span>
+        <span id="player-two" class="button">Naughts</span>
     </div>
-
+    
+    <div class="reset-buttons">
+        <span id="player-one" class="button reset-button">Reset Game</span>
+        <span id="player-two" class="button reset-button">Reset Score</span>
+    </div>
 
     <section id="game-board-container">
         <div id="row-1" class="game-board-rows">
@@ -36,7 +42,7 @@
 
     </section>
 
-    <p id="winner-pop-up">Crosses Wins!</p>
+    <p id="winner-pop-up" class="pop-up"></p>
 
     
     <script src="Main.Js"></script>
