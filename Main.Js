@@ -5,11 +5,13 @@ let gameBoardCells = document.querySelectorAll('.game-tile');
 const playerOne = document.querySelector('#player-one');
 const playerTwo = document.querySelector('#player-two');
 let winnerPopUpBox = document.querySelector('#winner-pop-up');
+let resetGame = document.querySelector('#reset-game');
+let resetScore = document.querySelector('#reset-score');
 
 const playerOneScore = document.querySelector('#player-one-score');
 const playerTwoScore = document.querySelector('#player-two-score');
 
-let gameScoreCounters = [0, 0]
+let playerScoreCounters = [0, 0]
 
 let gameBoardCounters = {
    r1: [0, 0, 0],
@@ -39,7 +41,7 @@ function gameDisplay(){
                 clickCount ++;
                 gameBoardCounters[rowNumber][columnNumber] = 1;
             };
-            checkAllCellsForWinner()
+            checkCellsForWinner()
         });
     }; 
 };
@@ -51,8 +53,8 @@ const threeCellsAreOdd = (val) => val % 2 !== 0 && val > 0;
 const stringToNumbers = (string) => parseInt(string);
 
 function updateScoreDisplay(){
-    playerOneScore.innerText = gameScoreCounters[0];
-    playerTwoScore.innerText = gameScoreCounters[1];
+    playerOneScore.innerText = playerScoreCounters[0];
+    playerTwoScore.innerText = playerScoreCounters[1];
 }
 
 updateScoreDisplay()
@@ -62,19 +64,28 @@ function checkForWinner(arr){
         console.log('crosses wins')
         winnerPopUpBox.className = 'winner-pop-up';
         winnerPopUpBox.innerText = 'Crosses Wins!';
-        gameScoreCounters[0] += 1
+        playerScoreCounters[0] += 1
         updateScoreDisplay()
         return
     } else if (arr.every(threeCellsAreOdd)){
         console.log('naughts wins')
         winnerPopUpBox.className = 'winner-pop-up';
         winnerPopUpBox.innerText = 'Naughts Wins!';
-        gameScoreCounters[1] += 1
+        playerScoreCounters[1] += 1
         updateScoreDisplay()
         return
     } else {
         return
     }
+}
+
+function checkCellsForWinner(){    
+    checkRows();
+    for(let i = 0; i < 3; i++){
+        checkColumns(i);
+    }
+    checkDiagonalsTopLeft();
+    checkDiagonalsTopRight();
 }
 
 function createArrayFromCells(stringArrName, parsedArrName){
@@ -134,14 +145,34 @@ function checkDiagonalsTopRight(){
     checkForWinner(diagonalCells)
 };
 
-function checkAllCellsForWinner(){    
-    checkRows();
-    for(let i = 0; i < 3; i++){
-        checkColumns(i);
-    }
-    checkDiagonalsTopLeft();
-    checkDiagonalsTopRight();
+
+
+function resetGameScore(){
+    playerScoreCounters = [0, 0];
+    updateScoreDisplay();
 }
 
+resetScore.addEventListener('mousedown', function(){
+    resetGameScore();
+})
 
+function resetGameBoard(){
 
+    gameBoardCounters = {
+        r1: [0, 0, 0],
+        r2: [0, 0, 0],
+        r3: [0, 0, 0]
+    }
+
+    for(let i = 0; i < gameBoardCells.length; i++){
+        gameBoardCells[i].innerText = '';
+    }
+
+    clickCount = 0;
+
+    winnerPopUpBox.className = '.pop-up';
+};
+
+resetGame.addEventListener('mousedown', function(){
+    resetGameBoard();
+})
